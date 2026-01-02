@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=SendMail
+Comment=Send emails based on file input
+Exec=SendMail
+Icon=sendmail
+Categories=Utility;ConsoleOnly;
+Terminal=true

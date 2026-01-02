@@ -94,6 +94,10 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 install(TARGETS ${PROJECT_NAME} DESTINATION bin)
 install(FILES SendMail.env DESTINATION bin)
 
+# Desktop file and Icon
+install(FILES SendMail.desktop DESTINATION share/applications)
+install(FILES resources/sendmail.svg DESTINATION share/icons/hicolor/scalable/apps)
+
 # Optimierungen
 if(NOT CMAKE_BUILD_TYPE MATCHES "Debug")
     target_compile_options(${PROJECT_NAME} PRIVATE -O3)
