@@ -5,7 +5,7 @@ cmake_minimum_required(VERSION 3.24)
 
 # Projektname und Sprache
 project(SendMail
-    VERSION 0.1.0
+    VERSION 0.1.1
     DESCRIPTION "SendMail based on Input"
     HOMEPAGE_URL "https://github.com/Zheng-Bote/send-mail"
     LANGUAGES C CXX)
@@ -92,7 +92,7 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
 
 # Install targets for AppImage support
 install(TARGETS ${PROJECT_NAME} DESTINATION bin)
-install(FILES SendMail.env DESTINATION bin)
+# SendMail.env is not installed (user provided)
 
 # Desktop file and Icon
 install(FILES SendMail.desktop DESTINATION share/applications)
