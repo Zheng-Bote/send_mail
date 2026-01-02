@@ -39,13 +39,20 @@ jobs:
           make -C build install DESTDIR=../AppDir
 
       - name: Generate AppImage
-        env:
-          QMAKE: ${{ env.Qt6_DIR }}/bin/qmake
         run: |
           # Download linuxdeploy tools
           wget https://github.com/linuxdeploy/linuxdeploy/releases/download/continuous/linuxdeploy-x86_64.AppImage
           wget https://github.com/linuxdeploy/linuxdeploy-plugin-qt/releases/download/continuous/linuxdeploy-plugin-qt-x86_64.AppImage
           chmod +x linuxdeploy*.AppImage
+
+          # Debug: Check where qmake is
+          echo "Searching for qmake in PATH..."
+          which qmake
+          qmake --version
+
+          # Set QMAKE explicitly
+          export QMAKE=$(which qmake)
+          echo "Using QMAKE: $QMAKE"
 
           # Run linuxdeploy
           ./linuxdeploy-x86_64.AppImage --appdir AppDir --output appimage --plugin qt
