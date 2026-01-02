@@ -57,6 +57,7 @@ FetchContent_Declare(
     GIT_REPOSITORY https://github.com/cutelyst/simple-mail.git
     GIT_TAG        master
 )
+set(BUILD_SHARED_LIBS OFF) # Build statically to avoid AppImage dependency issues
 FetchContent_MakeAvailable(SimpleMail)
 
 # Quelldateien definieren (inklusive MVC Struktur)
