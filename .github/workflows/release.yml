@@ -61,6 +61,12 @@ jobs:
         run: |
           mv SendMail-*.AppImage SendMail.AppImage
 
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: SendMail-AppImage
+          path: SendMail.AppImage
+
       - name: Create Release
         uses: softprops/action-gh-release@v2
         if: startsWith(github.ref, 'refs/tags/')
