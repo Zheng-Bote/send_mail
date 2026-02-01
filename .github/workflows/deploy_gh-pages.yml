@@ -21,6 +21,7 @@ jobs:
         uses: Zheng-Bote/gha_ghpages@main # or @v1.0.0
         with:
           template: "theme/template.html"
+          assets: "theme/assets"
           output: "public"
           docs: "docs"
 
