@@ -1,77 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>GHP | index</title>
-
-    <link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon" />
-    <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" />
-
-    <link
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>GHP | index</title><link rel="shortcut icon" href="assets/favicon.ico" type="image/x-icon" /><link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg" /><link
       href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;500&display=swap"
       rel="stylesheet"
-    />
-    <link rel="stylesheet" href="assets/css/template.css" />
-  </head>
-  <body>
-    <header>
-      <div class="header_left">
-        <img src="assets/img/favicon.svg" alt="Logo" />
-        <h1>GHP</h1>
-      </div>
-      <div class="header_middle">
-        <span>System Status: Active</span>
-      </div>
-      <div class="header_right">
-        <button class="tron-btn">Login</button>
-        <button class="tron-btn" style="margin-left: 10px">Sync</button>
-      </div>
-    </header>
-
-    <aside class="aside">
-      <nav class="nav"><ul class="nav-list">
-</ul>
-</nav>
-    </aside>
-
-    <main class="main"><h1>SendMail</h1>
-<p>SendMail is a robust C++23 console application designed to automate email dispatching based on file system events. Built with Qt6 and the SimpleMail library, it monitors a specific directory and automatically emails the contents of distinctively named text files.</p>
-<h2>Architecture</h2>
-<p>The application follows a strict <strong>Model-View-Controller (MVC)</strong> architectural pattern to ensure separation of concerns and maintainabilty:</p>
-<ul>
-<li><strong>Model (<code>ConfigModel</code>)</strong>: Responsible for loading and validating application configuration from environment variables (<code>.env</code>). It provides a clean interface for accessing SMTP credentials and runtime settings.</li>
-<li><strong>View</strong>: As a background console application, the &quot;View&quot; is represented by the standard output/logging (QDebug/QInfo) which provides real-time status updates and error reporting to the administrator.</li>
-<li><strong>Controller (<code>MailController</code>)</strong>: The core logic engine. It manages the <code>QFileSystemWatcher</code> to monitor the target directory. Upon detecting valid files, it orchestrates the workflow by reading the file and delegating the transmission task to the Service layer.</li>
-<li><strong>Service (<code>SmtpService</code>)</strong>: A dedicated service wrapper around <code>SimpleMail</code>. It handles the low-level SMTP protocol details, including connection establishment, STARTTLS upgrades, finding the correct authentication method (<code>AUTH LOGIN</code>), and MIME message construction.</li>
-</ul>
-<h3>Workflow</h3>
-<ol>
-<li><strong>Initialization</strong>: The app loads settings from <code>SendMail.env</code>.</li>
-<li><strong>Monitoring</strong>: It starts watching the configured <code>WATCH_DIR</code> for files matching <code>*.SendMail</code>.</li>
-<li><strong>Detection</strong>: When a file like <code>user@example.com.SendMail</code> is created:<ul>
-<li>The Controller detects the event.</li>
-<li>It waits for a stabilization period (2 seconds) to ensure the write is complete.</li>
-</ul>
-</li>
-<li><strong>Processing</strong>:<ul>
-<li>The recipient email is extracted from the filename (<code>user@example.com</code>).</li>
-<li>The file content is read and used as the email body.</li>
-</ul>
-</li>
-<li><strong>Transmission</strong>: <code>SmtpService</code> connects to the SMTP server (using STARTTLS/AuthLogin) and sends the email.</li>
-<li><strong>Cleanup</strong>: On successful transmission, the source file is deleted from the disk.</li>
-</ol>
-<h2>Prerequisites</h2>
-<ul>
-<li><strong>Linux</strong> (Tested on current distributions)</li>
-<li><strong>C++23 Compiler</strong> (GCC 12+ or Clang 16+)</li>
-<li><strong>CMake</strong> 3.24 or higher</li>
-<li><strong>Qt6</strong> (Core, Network)</li>
-<li><strong>OpenSSL</strong></li>
-</ul>
-<h2>Build Instructions</h2>
-<pre><code class="language-bash"># Clone the repository
+    /><link rel="stylesheet" href="assets/css/template.css" /></head><body><header><div class="header_left"><img src="assets/img/favicon.svg" alt="Logo" /><h1>GHP</h1></div><div class="header_middle"><span>System Status: Active</span></div><div class="header_right"><button class="tron-btn">Login</button><button class="tron-btn" style="margin-left: 10px">Sync</button></div></header><aside class="aside"><nav class="nav"><ul class="nav-list"></ul></nav></aside><main class="main"><h1>SendMail</h1><p>SendMail is a robust C++23 console application designed to automate email dispatching based on file system events. Built with Qt6 and the SimpleMail library, it monitors a specific directory and automatically emails the contents of distinctively named text files.</p><h2 id="architecture">Architecture</h2><p>The application follows a strict <strong>Model-View-Controller (MVC)</strong> architectural pattern to ensure separation of concerns and maintainabilty:</p><ul><li><strong>Model (<code>ConfigModel</code>)</strong>: Responsible for loading and validating application configuration from environment variables (<code>.env</code>). It provides a clean interface for accessing SMTP credentials and runtime settings.</li><li><strong>View</strong>: As a background console application, the &quot;View&quot; is represented by the standard output/logging (QDebug/QInfo) which provides real-time status updates and error reporting to the administrator.</li><li><strong>Controller (<code>MailController</code>)</strong>: The core logic engine. It manages the <code>QFileSystemWatcher</code> to monitor the target directory. Upon detecting valid files, it orchestrates the workflow by reading the file and delegating the transmission task to the Service layer.</li><li><strong>Service (<code>SmtpService</code>)</strong>: A dedicated service wrapper around <code>SimpleMail</code>. It handles the low-level SMTP protocol details, including connection establishment, STARTTLS upgrades, finding the correct authentication method (<code>AUTH LOGIN</code>), and MIME message construction.</li></ul><h3 id="workflow">Workflow</h3><ol><li><strong>Initialization</strong>: The app loads settings from <code>SendMail.env</code>.</li><li><strong>Monitoring</strong>: It starts watching the configured <code>WATCH_DIR</code> for files matching <code>*.SendMail</code>.</li><li><strong>Detection</strong>: When a file like <code>user@example.com.SendMail</code> is created:<ul><li>The Controller detects the event.</li><li>It waits for a stabilization period (2 seconds) to ensure the write is complete.</li></ul></li><li><strong>Processing</strong>:<ul><li>The recipient email is extracted from the filename (<code>user@example.com</code>).</li><li>The file content is read and used as the email body.</li></ul></li><li><strong>Transmission</strong>: <code>SmtpService</code> connects to the SMTP server (using STARTTLS/AuthLogin) and sends the email.</li><li><strong>Cleanup</strong>: On successful transmission, the source file is deleted from the disk.</li></ol><h2 id="prerequisites">Prerequisites</h2><ul><li><strong>Linux</strong> (Tested on current distributions)</li><li><strong>C++23 Compiler</strong> (GCC 12+ or Clang 16+)</li><li><strong>CMake</strong> 3.24 or higher</li><li><strong>Qt6</strong> (Core, Network)</li><li><strong>OpenSSL</strong></li></ul><h2 id="build-instructions">Build Instructions</h2><pre><code># Clone the repository
 git clone https://github.com/Zheng-Bote/send-mail.git
 cd send-mail
 
@@ -81,10 +11,7 @@ mkdir build &amp;&amp; cd build
 # Configure and Build
 cmake ..
 make -j$(nproc)
-</code></pre>
-<h2>Configuration</h2>
-<p>Create a <code>SendMail.env</code> file in the same directory as the executable (or copy <code>docs/SendMail.env</code>):</p>
-<pre><code class="language-ini">SMTP_SERVER=&quot;smtp.example.com&quot;
+</code></pre><h2 id="configuration">Configuration</h2><p>Create a <code>SendMail.env</code> file in the same directory as the executable (or copy <code>docs/SendMail.env</code>):</p><pre><code>SMTP_SERVER=&quot;smtp.example.com&quot;
 SMTP_PORT=&quot;587&quot;
 SMTP_USERNAME=&quot;user@example.com&quot;
 SMTP_PASSWORD=&quot;secret_password&quot;
@@ -93,28 +20,6 @@ SMTP_FROM=&quot;sender@example.com&quot;
 SMTP_STARTTLS=&quot;true&quot;
 # Directory to monitor
 WATCH_DIR=&quot;../data&quot;
-</code></pre>
-<h2>Usage</h2>
-<p>Run the application:</p>
-<pre><code class="language-bash">./SendMail
-</code></pre>
-<p>To trigger an email, create a file in the watched directory:</p>
-<pre><code class="language-bash">echo &quot;Hello World&quot; &gt; data/recipient@domain.com.SendMail
-</code></pre>
-<p>The application will pick up this file, send an email to <code>recipient@domain.com</code> with the body &quot;Hello World&quot;, and then delete the file.</p>
-<h3>Troubleshooting</h3>
-<ul>
-<li><strong>Error 535 5.7.8</strong>: This usually indicates an authentication failure. Ensure your <code>SMTP_USERNAME</code> and <code>SMTP_PASSWORD</code> are correct. The application enforces <code>AUTH LOGIN</code> which is required by many providers like Netcup.</li>
-<li><strong>STARTTLS</strong>: The application logs the connection type on startup. Check the console output to verify if secure connection is enabled.</li>
-</ul>
-<h2>License</h2>
-<p>This project is licensed under the MIT License.</p>
-</main>
-
-    <footer class="footer">
-      <div class="footer-section_left">SOURCE: MCP_v2</div>
-      <div class="footer-section_center">&copy; 2026 ZHENG ROBERT</div>
-      <div class="footer-section_right">CLEARANCE_LEVEL: 5</div>
-    </footer>
-  </body>
-</html>
+</code></pre><h2 id="usage">Usage</h2><p>Run the application:</p><pre><code>./SendMail
+</code></pre><p>To trigger an email, create a file in the watched directory:</p><pre><code>echo &quot;Hello World&quot; &gt; data/recipient@domain.com.SendMail
+</code></pre><p>The application will pick up this file, send an email to <code>recipient@domain.com</code> with the body &quot;Hello World&quot;, and then delete the file.</p><h3 id="troubleshooting">Troubleshooting</h3><ul><li><strong>Error 535 5.7.8</strong>: This usually indicates an authentication failure. Ensure your <code>SMTP_USERNAME</code> and <code>SMTP_PASSWORD</code> are correct. The application enforces <code>AUTH LOGIN</code> which is required by many providers like Netcup.</li><li><strong>STARTTLS</strong>: The application logs the connection type on startup. Check the console output to verify if secure connection is enabled.</li></ul><h2 id="license">License</h2><p>This project is licensed under the MIT License.</p></main><footer class="footer"><div class="footer-section_left">SOURCE: MCP_v2</div><div class="footer-section_center">&copy; 2026 ZHENG ROBERT</div><div class="footer-section_right">CLEARANCE_LEVEL: 5</div></footer></body></html>
